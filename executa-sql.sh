@@ -1,32 +1,18 @@
 #!/bin/bash
+set -e
 
-DB_HOST="localhost"
-DB_PORT="8080"
-DB_NAME="apartamento"
-DB_USER="user_app_nord"
+echo "🚀 Iniciando execução dos scripts SQL"
 
-echo "Iniciando execução dos scripts..."
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-while IFS= read -r script
-do
-  if [[ -z "$script" || "$script" == \#* ]]; then
-    continue
-  fi
+psql "$DATABASE_URL" -v ON_ERROR_STOP=1 <<-EOSQL
+  CREATE SCHEMA IF NOT EXISTS nord_tool;
+EOSQL
 
-  echo "Executando: $script"
+while IFS= read -r file || [[ -n "$file" ]]; do
+  [[ -z "$file" || "$file" =~ ^# ]] && continue
+  echo "➡️ Executando: $file"
+  psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f "$SCRIPT_DIR/$file"
+done < "$SCRIPT_DIR/filelist.txt"
 
-  psql \
-    -h "$DB_HOST" \
-    -p "$DB_PORT" \
-    -U "$DB_USER" \
-    -d "$DB_NAME" \
-    -f "$script"
-
-  if [ $? -ne 0 ]; then
-    echo "❌ Erro ao executar $script"
-    exit 1
-  fi
-
-done < filelist.txt
-
-echo "✅ Todos os scripts executados com sucesso!"
+echo "✅ Scripts executados com sucesso"
