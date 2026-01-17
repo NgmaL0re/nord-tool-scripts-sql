@@ -1,4 +1,4 @@
-name: Deploy SQL - DEV
+name: SQL Dev
 
 on:
   push:
@@ -6,19 +6,22 @@ on:
       - develop
 
 jobs:
-  sql:
+  migrate:
     runs-on: ubuntu-latest
 
+    environment: dev 
+
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install psql
-        run: sudo apt-get install -y postgresql-client
+      - name: Install PostgreSQL client
+        run: sudo apt-get update && sudo apt-get install -y postgresql-client
+
+      - name: Make script executable
+        run: chmod +x executa-sql.sh
 
       - name: Run SQL scripts
         env:
-          DATABASE_URL: ${{ secrets.RAILWAY_DATABASE_URL_DEV }}
-        run: |
-          chmod +x executa-sql.sh
-          ./executa-sql.sh
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: ./executa-sql.sh
