@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS apartamento_vistoria (
     nm_horario_vistoria VARCHAR(5),
     id_status_vistoria SMALLINT NOT NULL,
     in_marcar_revistoria BOOLEAN DEFAULT FALSE,
-    tx_observacao_revistoria TYPE TEXT,
+    tx_observacao_revistoria TEXT,
     dt_revistoria_vigente DATE,
     CONSTRAINT PK_apartamento_vistoria PRIMARY KEY (id_apartamento_vistoria),
     CONSTRAINT UK01_apartamento_vistoria UNIQUE (id_apartamento_vistoria),
