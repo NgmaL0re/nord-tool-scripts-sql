@@ -8,20 +8,20 @@ CREATE TABLE IF NOT EXISTS apartamento_vistoria (
     in_marcar_revistoria BOOLEAN DEFAULT FALSE,
     tx_observacao_revistoria TEXT,
     dt_revistoria_vigente DATE,
+    dt_inclusao TIMESTAMP NOT NULL,
+    dt_alteracao TIMESTAMP NULL,
+    nm_usuario VARCHAR(36) NULL,
     CONSTRAINT PK_apartamento_vistoria PRIMARY KEY (id_apartamento_vistoria),
     CONSTRAINT UK01_apartamento_vistoria UNIQUE (id_apartamento_vistoria),
     CONSTRAINT FK01_dia_semana_x_apartamento_vistoria FOREIGN KEY (id_dia_semana) REFERENCES dia_semana (id_dia_semana),
     CONSTRAINT FK02_status_vistoria_x_apartamento_vistoria FOREIGN KEY (id_status_vistoria) REFERENCES status_vistoria (id_status_vistoria)
 );
 
-DO $$
-    BEGIN
-        IF EXISTS (SELECT 1 FROM pg_attribute
-            WHERE attrelid = 'apartamento_vistoria'::regclass
-            AND attname = 'tx_observacao_revistoria'
-            AND NOT attisdropped
-        ) THEN
-            ALTER TABLE apartamento_vistoria
-            ALTER COLUMN tx_observacao_revistoria TYPE TEXT;
-    END IF;
-END $$;
+ALTER TABLE apartamento_vistoria
+ADD COLUMN IF NOT EXISTS dt_inclusao TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
+
+ALTER TABLE apartamento_vistoria ADD COLUMN 
+IN NOT EXISTS ADD COLUMN IF NOT EXISTS dt_alteracao TIMESTAMP NULL;
+
+ALTER TABLE apartamento_vistoria
+ADD COLUMN IF NOT EXISTS nm_usuario VARCHAR(36) NULL;
