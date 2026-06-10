@@ -1,5 +1,5 @@
 CREATE TABLE apartamento_vistoria_historico (
-    id_apartamento_vistoria_historico BIGSERIAL PRIMARY KEY,
+    id_apartamento_vistoria_historico BIGSERIAL,
     id_apartamento_vistoria BIGINT NOT NULL,
     nr_versao INTEGER NOT NULL,
     nm_atributo VARCHAR(25) NOT NULL,
