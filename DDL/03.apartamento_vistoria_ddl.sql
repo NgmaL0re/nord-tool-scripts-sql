@@ -17,11 +17,11 @@ CREATE TABLE IF NOT EXISTS apartamento_vistoria (
     CONSTRAINT FK02_status_vistoria_x_apartamento_vistoria FOREIGN KEY (id_status_vistoria) REFERENCES status_vistoria (id_status_vistoria)
 );
 
-ALTER TABLE apartamento_vistoria
-ADD COLUMN IF NOT EXISTS dt_inclusao TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
+ALTER TABLE apartamento_vistoria ADD COLUMN 
+IF NOT EXISTS dt_inclusao TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
 
 ALTER TABLE apartamento_vistoria ADD COLUMN 
-IN NOT EXISTS ADD COLUMN IF NOT EXISTS dt_alteracao TIMESTAMP NULL;
+IF NOT EXISTS dt_alteracao TIMESTAMP NULL;
 
-ALTER TABLE apartamento_vistoria
-ADD COLUMN IF NOT EXISTS nm_usuario VARCHAR(36) NULL;
+ALTER TABLE apartamento_vistoria ADD COLUMN 
+IF NOT EXISTS nm_usuario VARCHAR(36) NULL;
