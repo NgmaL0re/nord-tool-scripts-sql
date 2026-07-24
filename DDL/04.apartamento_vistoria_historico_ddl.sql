@@ -1,4 +1,4 @@
-CREATE TABLE apartamento_vistoria_historico (
+CREATE TABLE IF NOT EXISTS apartamento_vistoria_historico (
     id_apartamento_vistoria_historico BIGSERIAL,
     id_apartamento_vistoria BIGINT NOT NULL,
     nr_versao INTEGER NOT NULL,
