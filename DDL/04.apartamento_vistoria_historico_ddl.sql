@@ -11,3 +11,6 @@ CREATE TABLE apartamento_vistoria_historico (
     CONSTRAINT FK01_apartamento_vistoria_x_apartamento_vistoria_historico 
         FOREIGN KEY (id_apartamento_vistoria) REFERENCES apartamento_vistoria (id_apartamento_vistoria)
 );
+
+CREATE INDEX IF NOT EXISTS IDX01_apartamento_vistoria_historico
+ON apartamento_vistoria_historico (id_apartamento_vistoria, nr_versao, id_apartamento_vistoria_historico);
