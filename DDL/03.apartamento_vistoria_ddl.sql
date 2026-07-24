@@ -25,3 +25,9 @@ IF NOT EXISTS dt_alteracao TIMESTAMP NULL;
 
 ALTER TABLE apartamento_vistoria ADD COLUMN 
 IF NOT EXISTS nm_usuario VARCHAR(36) NULL;
+
+CREATE INDEX IF NOT EXISTS IDX01_apartamento_vistoria
+ON apartamento_vistoria(id_dia_semana);
+
+CREATE INDEX IF NOT EXISTS IDX02_apartamento_vistoria
+ON apartamento_vistoria(id_status_vistoria);
