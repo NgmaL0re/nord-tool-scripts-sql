@@ -1,4 +1,4 @@
-CREATE TABLE apartamento_vistoria_historico (
+CREATE TABLE IF NOT EXISTS apartamento_vistoria_historico (
     id_apartamento_vistoria_historico BIGSERIAL,
     id_apartamento_vistoria BIGINT NOT NULL,
     nr_versao INTEGER NOT NULL,
@@ -15,3 +15,6 @@ CREATE TABLE apartamento_vistoria_historico (
 
 ALTER TABLE apartamento_vistoria_historico ADD COLUMN 
 IF NOT EXISTS cd_transacao VARCHAR(36) NULL;
+
+CREATE INDEX IF NOT EXISTS IDX01_apartamento_vistoria_historico
+ON apartamento_vistoria_historico (id_apartamento_vistoria, nr_versao, id_apartamento_vistoria_historico);

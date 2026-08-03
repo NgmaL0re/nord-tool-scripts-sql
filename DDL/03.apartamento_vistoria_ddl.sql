@@ -33,3 +33,8 @@ IF NOT EXISTS nm_status_andamento_vistoria VARCHAR(20) NULL;
 
 ALTER TABLE apartamento_vistoria ADD COLUMN 
 IF NOT EXISTS cd_transacao VARCHAR(36) NULL;
+CREATE INDEX IF NOT EXISTS IDX01_apartamento_vistoria
+ON apartamento_vistoria(id_dia_semana);
+
+CREATE INDEX IF NOT EXISTS IDX02_apartamento_vistoria
+ON apartamento_vistoria(id_status_vistoria);
