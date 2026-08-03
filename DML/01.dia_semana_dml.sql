@@ -21,3 +21,7 @@ ON CONFLICT (nm_dia_semana) DO NOTHING;
 INSERT INTO dia_semana (id_dia_semana, nm_dia_semana)
 VALUES (6, 'Sem agendamento')
 ON CONFLICT (nm_dia_semana) DO NOTHING;
+
+INSERT INTO dia_semana (id_dia_semana, nm_dia_semana)
+VALUES (7, 'Sábado')
+ON CONFLICT (nm_dia_semana) DO NOTHING;

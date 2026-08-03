@@ -1,2 +1,4 @@
 DDL/03.apartamento_vistoria_ddl.sql
 DDL/04.apartamento_vistoria_historico_ddl.sql
+DDL/05.cronograma_semanal_ddl.sql
+DML/01.dia_semana_dml.sql
